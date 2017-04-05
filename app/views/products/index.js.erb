@@ -1,0 +1,6 @@
+$('#my-products').append('<%= escape_javascript render @products %>')
+$('.pagination').replaceWith('<%= escape_javascript will_paginate @products %>');
+$('#loader').fadeOut('slow')
+<% unless @products.next_page %>
+  $('#infinite-scrolling .pagination').remove();
+<% end %>

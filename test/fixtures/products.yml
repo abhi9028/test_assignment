@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Product1
+  description: Text desc
+  price: 3234.5
+
+two:
+  name: MyString
+  description:  Text descdad
+  price: 1044.5

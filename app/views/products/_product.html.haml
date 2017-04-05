@@ -1,0 +1,8 @@
+.col-md-4
+  .thumbnail
+    .img
+      = image_tag "product#{Random.new.rand(8)}"
+    .caption.caption-up
+      %h3= link_to product.name, product_path(product)
+      %h4= product.timestamp
+      %h4= truncate(strip_tags(product.description), length: 60)

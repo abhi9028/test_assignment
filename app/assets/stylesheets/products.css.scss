@@ -1,0 +1,45 @@
+#load_more_posts {
+  display: none;
+  margin-bottom: 10px;
+}
+
+#static-pagination {
+  position: fixed;
+  top: 30px;
+  opacity: 0.7;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+//colors
+$color_gallery_approx: #eeeeee;
+$white: #ffffff;
+
+body {
+	padding-bottom: 40px;
+	padding-top: 60px;
+}
+
+#pages {
+	display: none;
+}
+
+.img {
+	width: 100%;
+	height: 200px;
+	background-color: $color_gallery_approx;
+}
+
+#loader {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: left;
+	opacity: .5;
+	background-color: $white;
+	z-index: 10;
+}

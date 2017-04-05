@@ -1,0 +1,12 @@
+.page-header
+  %h1 Products
+
+/ This is the overlay DIV that is displayed while loading a new page
+#loader
+#my-products
+  .page-delimiter.first-page{"data-page" => params[:page] || 1}
+  .content
+    = render @products
+- if @products.next_page
+  #infinite-scrolling.hidden
+    = will_paginate
