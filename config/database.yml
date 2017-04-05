@@ -23,7 +23,3 @@ development:
 test:
   <<: *default
   database: test_product_development
-
-production:
-  <<: *default
-  database: db/production.sqlite3
