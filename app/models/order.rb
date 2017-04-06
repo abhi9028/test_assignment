@@ -1,0 +1,56 @@
+class Order < ActiveRecord::Base
+  # belongs_to :user
+  attr_accessor :cvv, :card_number, :stripe_customer_token, :exp_month, :exp_year, :stripe_credit_card_id
+
+  validates :name, :address, :email, presence: true
+
+  has_many :order_items, dependent: :destroy
+  has_one :purchase, dependent: :destroy
+  IN_PROGRESS = 0
+  PLACED = 1
+  CANCELLED = 2
+  PAID = 3
+
+  enum status: { inprogress: IN_PROGRESS, placed: PLACED, cancelled: CANCELLED, paid: PAID }
+  # scope :by_customer, ->(user) { where(user: user) }
+  scope :in_progress, -> { where(status: IN_PROGRESS) }
+
+  def total_price
+    order_items.to_a.sum { |item| item.order_item_price }
+  end
+
+  def add_product(product_id, unit_price)
+    current_item = order_items.where(product_id: product_id).first
+    if current_item
+      current_item.quantity += 1
+      current_item.save
+    else
+      current_item = order_items.build(product_id: product_id, quantity: 1, unit_price: unit_price)
+    end
+      current_item
+  end
+
+  def buy_with_stripe
+    if self.valid?
+      begin
+        customer = Stripe::Customer.create(
+          :email => self.email,
+          :source  => self.stripe_customer_token
+        )
+        self.stripe_customer_token = customer.id
+        
+        charge = Stripe::Charge.create(
+          customer: customer.id,
+          amount: ((total_price) * 100).to_i,
+          description: "#{self.email} Stripe customer",
+          currency: 'usd'
+        )
+        self.save
+      rescue Stripe::CardError => e
+        errors.add(:base , e.message)
+        false
+      end
+    end
+  end
+
+end

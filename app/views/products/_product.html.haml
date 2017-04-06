@@ -1,6 +1,7 @@
 .col-md-4
   .thumbnail
     .img
+      = link_to "Add to cart", order_items_url(product_id: product.id, unit_price: product.price), method: 'POST', remote: true
       = image_tag "product#{Random.new.rand(8)}"
     .caption.caption-up
       %h3= link_to product.name, product_path(product)

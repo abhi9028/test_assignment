@@ -15,3 +15,4 @@
 //= require bootstrap
 //= require turbolinks
 //= require products
+//= require stripe_checkout

@@ -1,0 +1,53 @@
+.container
+  .row
+    .col-xs-8
+      .panel.panel-info
+        .panel-heading
+          .panel-title
+            .row
+              .col-xs-6
+                %h5
+                  %span.glyphicon.glyphicon-shopping-cart
+                  Shopping Cart
+              .col-xs-6
+                = link_to root_path do
+                  %button.btn.btn-primary.btn-sm.btn-block{:type => "button"}
+                    %span.glyphicon.glyphicon-share-alt
+                    Continue shopping
+        - if @order.order_items.present?
+          .panel-body
+            - @order.order_items.each do |order_item|
+              .row
+                .col-xs-2
+                  %img.img-responsive{:src => "http://placehold.it/100x70"}/
+                .col-xs-4
+                  %h4.product-name
+                    %strong 
+                    = order_item.name
+                  %h4
+                    %small 
+                      = raw order_item.description.truncate(50)
+                .col-xs-6
+                  .col-xs-6.text-right
+                    %h6
+                      %strong
+                        = order_item.order_item_price
+                        %span.text-muted x
+                  .col-xs-4
+                    = order_item.quantity
+                    / %input.form-control.input-sm{:type => "text", :value => "1"}/
+                  .col-xs-2
+                    %button.btn.btn-link.btn-xs{:type => "button"}
+                      %span.glyphicon.glyphicon-trash
+                %hr/
+          .panel-footer
+            .row.text-center
+              .col-xs-9
+                %h4.text-right
+                  Total
+                  %strong 
+                    = @order.total_price
+              .col-xs-3
+                = link_to new_order_path do
+                  %button.btn.btn-success.btn-block{:type => "button"}
+                    Checkout

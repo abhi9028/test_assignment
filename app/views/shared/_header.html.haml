@@ -1,4 +1,32 @@
 .navbar.navbar-inverse{:role => "navigation"}
   .container
     .navbar-header
-      
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li.dropdown
+          %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+            %span.glyphicon.glyphicon-shopping-cart
+            = current_order.order_items.count 
+            Items
+            %span.caret
+          %ul.dropdown-menu.dropdown-cart{:role => "menu"}
+            - if current_order.order_items.present?
+              - current_order.order_items.each do |order_item|
+                %li
+                  %span.item
+                    %span.item-left
+                      %img{:alt => "", :src => "http://lorempixel.com/50/50/"}/
+                      %span.item-info
+                        %span 
+                          = order_item.name
+                        %span 
+                        = order_item.order_item_price
+                    %span.item-right
+                      %button.btn.btn-xs.btn-danger.pull-right x
+              %li.divider
+              %li
+                = link_to "View Cart", view_cart_path, class: 'text-center'
+            - else
+              %li
+                %span.text-center There are no items
+    / /.navbar-collapse

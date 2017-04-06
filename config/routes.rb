@@ -2,7 +2,19 @@ Rails.application.routes.draw do
   
   resources :products, only: [:index, :show]
 
+  resources :order_items, only: [:create, :update, :destroy]
+
   root to: 'products#index'
+
+
+  resources :orders do
+    get :thank_you, on: :member
+    post :charge, on: :member
+  end
+  
+  get 'view_cart' => 'orders#view_cart'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
