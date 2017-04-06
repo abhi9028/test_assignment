@@ -10,15 +10,26 @@ class ApplicationController < ActionController::Base
     if !session[:order_id].nil?
       Order.find(session[:order_id])
     else
-      order = Order.new()
-      order.save(validate: false)
-      session[:order_id] = order.id
-      return order
+      lastpendingcustomerorder || Order.new(user: current_user)
     end
   end
 
-  def lastpendingorder
-    Order.in_progress.last
+  def after_sign_in_path_for(resource)
+    if session[:order_id].present? && user_signed_in?
+      order = Order.find(session[:order_id])
+      if order.user_id.nil?
+        order.update(user: current_user)
+      else
+        # order
+      end
+    end
+    super
+  end
+
+  private
+
+  def lastpendingcustomerorder
+    Order.in_progress.by_customer(current_user).last
   end
 
 end

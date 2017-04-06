@@ -1,13 +1,12 @@
 class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
-      t.string   :name
-      t.text     :address
-      t.string   :email
-      t.decimal :total, precision: 10, scale: 2
+      t.belongs_to :user, index: true
+      t.belongs_to :address, index: true
       t.integer :status, default: 0, null: false
-      t.string   :stripe_customer_token
       t.timestamps null: false
     end
+    add_foreign_key :orders, :users
+    add_foreign_key :orders, :addresses
   end
 end

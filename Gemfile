@@ -41,6 +41,7 @@ gem 'stripe'
 
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'devise'
 
 gem 'betterlorem'
 gem 'bootstrap-sass', '~> 3.0.3.0'

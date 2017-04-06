@@ -22,16 +22,16 @@
                   %img.img-responsive{:src => "http://placehold.it/100x70"}/
                 .col-xs-4
                   %h4.product-name
-                    %strong 
+                    %strong
                     = order_item.name
                   %h4
-                    %small 
+                    %small
                       = raw order_item.description.truncate(50)
                 .col-xs-6
                   .col-xs-6.text-right
                     %h6
                       %strong
-                        = order_item.order_item_price
+                        = order_item.total_price
                         %span.text-muted x
                   .col-xs-4
                     = order_item.quantity
@@ -45,9 +45,9 @@
               .col-xs-9
                 %h4.text-right
                   Total
-                  %strong 
+                  %strong
                     = @order.total_price
               .col-xs-3
-                = link_to new_order_path do
+                = link_to checkout_index_path do
                   %button.btn.btn-success.btn-block{:type => "button"}
                     Checkout

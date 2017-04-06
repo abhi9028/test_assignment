@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
 
   def thank_you
     @order = Order.find_by(id: params[:id])
-  end 
+  end
 
   def charge
     @order = current_order
@@ -51,7 +51,7 @@ class OrdersController < ApplicationController
 
   def thank_you
     @order = Order.find_by(id: params[:id])
-  end 
+  end
 
   def destroy
     @order.destroy
@@ -61,7 +61,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def view_cart
+  def shopping_bag
     @order = current_order
   end
 

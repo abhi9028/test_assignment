@@ -6,7 +6,7 @@
         %li.dropdown
           %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
             %span.glyphicon.glyphicon-shopping-cart
-            = current_order.order_items.count 
+            = current_order.order_items.count
             Items
             %span.caret
           %ul.dropdown-menu.dropdown-cart{:role => "menu"}
@@ -17,15 +17,15 @@
                     %span.item-left
                       %img{:alt => "", :src => "http://lorempixel.com/50/50/"}/
                       %span.item-info
-                        %span 
+                        %span
                           = order_item.name
-                        %span 
-                        = order_item.order_item_price
+                        %span
+                        = order_item.total_price
                     %span.item-right
                       %button.btn.btn-xs.btn-danger.pull-right x
               %li.divider
               %li
-                = link_to "View Cart", view_cart_path, class: 'text-center'
+                = link_to "View Cart", shopping_bag_path, class: 'text-center'
             - else
               %li
                 %span.text-center There are no items

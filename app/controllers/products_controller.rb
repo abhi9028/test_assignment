@@ -1,8 +1,9 @@
 class ProductsController < ApplicationController
- 
+
   # get list of products
   def index
     @products = Product.paginate(page: params[:page], per_page: 9).order('created_at DESC')
+    @order_item = current_order.order_items.new
     respond_to do |format|
       format.html
       format.js

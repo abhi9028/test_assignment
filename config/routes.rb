@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  
+
+  devise_for :users
   resources :products, only: [:index, :show]
 
   resources :order_items, only: [:create, :update, :destroy]
@@ -11,9 +12,11 @@ Rails.application.routes.draw do
     get :thank_you, on: :member
     post :charge, on: :member
   end
-  
-  get 'view_cart' => 'orders#view_cart'
 
+
+  get 'shopping-bag' => 'orders#shopping_bag'
+
+  resources :checkout
 
 
   # The priority is based upon order of creation: first created -> highest priority.
