@@ -2,6 +2,9 @@
   .container
     .navbar-header
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.nav-pills.navbar-left
+        = render 'devise/menu/registration_items'
+        = render 'devise/menu/login_items'
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown
           %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -21,12 +24,9 @@
                           = order_item.name
                         %span
                         = order_item.total_price
-                    %span.item-right
-                      %button.btn.btn-xs.btn-danger.pull-right x
               %li.divider
               %li
-                = link_to "View Cart", shopping_bag_path, class: 'text-center'
+                = link_to "Shopping Bag", shopping_bag_path, class: 'text-center'
             - else
               %li
                 %span.text-center There are no items
-    / /.navbar-collapse

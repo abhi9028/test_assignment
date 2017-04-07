@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
+//= require toastr_rails
 //= require products
 //= require stripe_checkout

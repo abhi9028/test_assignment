@@ -12,10 +12,11 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-    order = current_order
-    order_item = order.order_item
-    if order_item.destroy
-      redirect_to checkout_path, notice: "Order Item Successfully remove"
+    @order = current_order
+    @order_item = @order.order_items.find(params[:id])
+    if @order_item.destroy
+      redirect_to shopping_bag_path, notice: "Order Item Successfully remove"
+      # @order_items = @order.order_items
     end
   end
 

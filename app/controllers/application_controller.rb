@@ -22,13 +22,13 @@ class ApplicationController < ActionController::Base
         session.delete(:order_id)
       end
       if current_user.cart.present? && current_user.cart.order_items.present?
-        order_items = current_order.order_items    
+        order_items = current_order.order_items
         current_user.cart.order_items << order_items
         if current_user.cart.save
           porder = Order.in_progress.by_customer(current_user)
           porder.last.destroy if porder.count > 1
-          session.delete(:order_id)   
-        end 
+          session.delete(:order_id)
+        end
       end
     end
     super
