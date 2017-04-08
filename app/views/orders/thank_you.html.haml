@@ -1,0 +1,80 @@
+.container
+  .row
+    .col-xs-12
+      .invoice-title
+        %h2 Order Confirmation
+        %h3.pull-right 
+          Order #
+          = @order.id
+      %hr/
+      .row
+        .col-xs-6
+          %address
+            %strong Billed To:
+            %br/
+            = @order.name
+            %br/
+            = @order.line_1
+            %br/
+            = @order.city
+        .col-xs-6.text-right
+          %address
+            %strong Shipped To:
+            %br/
+            = @order.name
+            %br/
+            = @order.line_1
+            %br/
+            = @order.city
+      .row
+        .col-xs-6
+          %address
+            %strong Payment Method:
+            %br/
+            Visa ending **** 4242
+            %br/
+            = @order.email
+        .col-xs-6.text-right
+          %address
+            %strong Order Date:
+            %br/
+            = @order.created_at.strftime("%b %d, %Y")
+            %br/
+            %br/
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title
+            %strong Order summary
+        .panel-body
+          .table-responsive
+            %table.table.table-condensed
+              %thead
+                %tr
+                  %td
+                    %strong Item
+                  %td.text-center
+                    %strong Price
+                  %td.text-center
+                    %strong Quantity
+                  %td.text-right
+                    %strong Totals
+              %tbody
+                - @order.order_items.each do |item|
+                  %tr
+                    %td 
+                      = item.name
+                    %td.text-center
+                      = item.unit_price
+                    %td.text-center
+                      = item.quantity
+                    %td.text-right
+                      = item.total_price
+                %tr
+                  %td.no-line
+                  %td.no-line
+                  %td.no-line.text-center
+                    %strong Total
+                  %td.no-line.text-right
+                    = @order.total_price

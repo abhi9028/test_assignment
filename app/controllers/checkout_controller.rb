@@ -4,7 +4,7 @@ class CheckoutController < ApplicationController
   def index
     @order = current_order
     if @order.order_items.empty?
-      redirect_to root_path, notice: 'There are no order in your cart'
+      redirect_to root_path, notice: "Your cart is empty"
     end
   end
 
@@ -14,6 +14,7 @@ class CheckoutController < ApplicationController
       if @order.update(order_params) && @order.buy_with_stripe
         purchase = current_user.purchases.create(order: @order, total_cost: @order.total_price)
         @order.update(status: 3)
+        session.delete(:order_id)
         format.html { redirect_to(thank_you_order_path(@order), notice: 'Thank you for your order.') }
         format.xml { render xml: @order, status: :created, location: @order }
       else

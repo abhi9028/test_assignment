@@ -19,13 +19,13 @@
                 %li
                   %span.item
                     %span.item-left
-                      %img{:alt => "", :src => "http://lorempixel.com/50/50/"}/
+                      / %img{:alt => "", :src => "http://lorempixel.com/50/50/"}/
                       %span.item-info
                         %span
                           = order_item.name
                         %span
-                        = order_item.total_price
-              %li.divider
+                          = order_item.total_price
+                %li.divider
               %li
                 = link_to "Shopping Bag", shopping_bag_path, class: 'text-center'
             - else

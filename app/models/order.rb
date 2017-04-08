@@ -1,12 +1,12 @@
 class Order < ActiveRecord::Base
+  
   attr_accessor :cvv, :card_number, :stripe_customer_token, :exp_month, :exp_year, :stripe_credit_card_id
 
   belongs_to :user
-  has_one :address#, dependent: :destroy
+  has_one :address, dependent: :destroy
   has_many :order_items, dependent: :destroy
   has_one :purchase, dependent: :destroy
-  delegate :email, to: :address, allow_nil: true
-
+  delegate :email, :line_1, :city, :name, to: :address, allow_nil: true
   accepts_nested_attributes_for :address, allow_destroy: true
 
   IN_PROGRESS = 0
@@ -49,7 +49,6 @@ class Order < ActiveRecord::Base
           description: "#{self.email} Stripe customer",
           currency: 'usd'
         )
-        self.save
       rescue Stripe::CardError => e
         errors.add(:base , e.message)
         false
