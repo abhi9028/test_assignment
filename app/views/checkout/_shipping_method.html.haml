@@ -1,0 +1,28 @@
+/ SHIPPING METHOD
+= form.fields_for :address, @order.build_address do |address_fields|
+  .panel.panel-info
+    .panel-heading Address
+    .panel-body
+      .form-group
+        .col-md-12
+          %h4 Shipping Address
+      .form-group
+        .col-md-12
+          %strong Name:
+        .col-md-12
+          = address_fields.text_field :name, class: 'form-control'
+          / %input.form-control{:name => "country", :type => "text", :value => ""}/
+      .form-group
+        .col-md-6.col-xs-12
+          %strong Line 1:
+          = address_fields.text_field :line_1, class: 'form-control'
+        .span1
+        .col-md-6.col-xs-12
+          %strong City:
+          = address_fields.text_field :city, class: 'form-control'
+      .form-group
+        .col-md-12
+          %strong Email Address:
+        .col-md-12
+          = address_fields.text_field :email, class: 'form-control'
+  / SHIPPING METHOD END

@@ -1,0 +1,48 @@
+.col-lg-6.col-md-6.col-sm-6.col-xs-12.col-md-push-6.col-sm-push-6
+  / REVIEW ORDER
+  .panel.panel-info
+    .panel-heading
+      Review Order
+      .pull-right
+        %small
+          = link_to 'Edit Cart', shopping_bag_path, class: 'afix-1'
+    .panel-body
+      - order.order_items.each do |item|
+        .form-group
+          .col-sm-3.col-xs-3
+            %img.img-responsive{:src => "//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg"}/
+          .col-sm-6.col-xs-6
+            .col-xs-12 
+              = item.name
+            .col-xs-12
+              %small
+                Quantity:
+                %span
+                  = item.quantity
+          .col-sm-3.col-xs-3.text-right
+            %h6
+              %span> $
+              = item.total_price
+        .form-group
+          %hr/
+      .form-group
+        .col-xs-12
+          %strong Subtotal
+          .pull-right
+            %span $
+            %span 
+              = order.total_price
+        .col-xs-12
+          %small Shipping
+          .pull-right
+            %span -
+      .form-group
+        %hr/
+      .form-group
+        .col-xs-12
+          %strong Order Total
+          .pull-right
+            %span $
+            %span
+              = order.total_price
+  / REVIEW ORDER END

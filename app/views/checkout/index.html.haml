@@ -1,0 +1,30 @@
+.container.wrapper
+  .row.cart-head
+    .container
+      .row
+        %p
+      .row
+        %div{:style => "display: table; margin: auto;"}
+          %span.step.step_complete
+            %a.check-bc{:href => "#"} Cart
+            %span.step_line.step_complete  
+            %span.step_line.backline  
+          %span.step.step_complete
+            %a.check-bc{:href => "#"} Checkout
+            %span.step_line  
+            %span.step_line.step_complete  
+          %span.step_thankyou.check-bc.step_complete Thank you
+      .row
+        %p
+  .row.cart-body
+    = form_for @order, url: charge_checkout_index_path, html: {id: 'new_order', method: 'POST', class: 'form-horizontal'} do |f|
+      = render 'review_order', order: @order
+      .col-lg-6.col-md-6.col-sm-6.col-xs-12.col-md-pull-6.col-sm-pull-6
+        = render 'shipping_method', form: f
+        / CREDIT CART PAYMENT
+        = render 'place_order', f: f
+        / CREDIT CART PAYMENT END
+      .form-group
+        .col-md-6.col-sm-6.col-xs-12
+          = f.submit "Place Order", id: "submit_order", class: "btn btn-primary btn-submit-fix", disable_with: "Submitting..."
+  .row.cart-footer

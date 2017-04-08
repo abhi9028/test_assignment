@@ -1,0 +1,34 @@
+/ CREDIT CART PAYMENT
+= f.hidden_field :stripe_customer_token
+- if @order.stripe_customer_token.present?
+  Credit card has been provided
+- else
+  .panel.panel-info
+    .panel-heading
+      %span
+        %i.glyphicon.glyphicon-lock
+      Secure Payment
+    .panel-body
+      .form-group
+        .col-md-12
+          %strong Credit Card Number:
+        .col-md-12
+          = f.text_field :card_number, maxlength: 16, class: 'form-control'
+      .form-group
+        .col-md-12
+          %strong Card CVV:
+        .col-md-12
+          = f.text_field :cvv, maxlength: 3, class: 'form-control'
+      .form-group
+        .col-md-12
+          %strong Expiration Date
+        .col-lg-6.col-md-6.col-sm-6.col-xs-12
+          = f.text_field :exp_month, class: 'form-control'
+        .col-lg-6.col-md-6.col-sm-6.col-xs-12
+          = f.text_field :exp_year, class: 'form-control'
+      .form-group
+        .col-md-12
+          %span Pay secure using your credit card.
+  / CREDIT CART PAYMENT END
+#stripe_error
+  %noscript JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
