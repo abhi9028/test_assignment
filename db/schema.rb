@@ -11,22 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406105414) do
+ActiveRecord::Schema.define(version: 20170506111343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "order_id"
     t.string   "name"
-    t.text     "address"
-    t.string   "email"
+    t.text     "line_1"
     t.string   "city"
+    t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
+  add_index "addresses", ["order_id"], name: "index_addresses_on_order_id", using: :btree
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "product_id"
@@ -43,13 +43,11 @@ ActiveRecord::Schema.define(version: 20170406105414) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "address_id"
     t.integer  "status",     default: 0, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  add_index "orders", ["address_id"], name: "index_orders_on_address_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "products", force: :cascade do |t|
@@ -95,10 +93,9 @@ ActiveRecord::Schema.define(version: 20170406105414) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "addresses", "users"
+  add_foreign_key "addresses", "orders"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
-  add_foreign_key "orders", "addresses"
   add_foreign_key "orders", "users"
   add_foreign_key "purchases", "orders"
   add_foreign_key "purchases", "users"

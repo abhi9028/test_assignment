@@ -1,10 +1,13 @@
 class Order < ActiveRecord::Base
-  # belongs_to :user
   attr_accessor :cvv, :card_number, :stripe_customer_token, :exp_month, :exp_year, :stripe_credit_card_id
 
   belongs_to :user
+  has_one :address#, dependent: :destroy
   has_many :order_items, dependent: :destroy
   has_one :purchase, dependent: :destroy
+  delegate :email, to: :address, allow_nil: true
+
+  accepts_nested_attributes_for :address, allow_destroy: true
 
   IN_PROGRESS = 0
   PLACED = 1
@@ -37,7 +40,8 @@ class Order < ActiveRecord::Base
           :email => self.email,
           :source  => self.stripe_customer_token
         )
-        self.stripe_customer_token = customer.id
+        self.user.stripe_id = customer.id
+        self.user.save
 
         charge = Stripe::Charge.create(
           customer: customer.id,

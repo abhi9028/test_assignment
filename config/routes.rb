@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
   get 'shopping-bag' => 'orders#shopping_bag'
 
-  resources :checkout
+  resources :checkout do
+    post :charge, on: :collection
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.
