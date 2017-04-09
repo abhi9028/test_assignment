@@ -10,7 +10,7 @@
       - order.order_items.each do |item|
         .form-group
           .col-sm-3.col-xs-3
-            %img.img-responsive{:src => "//c1.staticflickr.com/1/466/19681864394_c332ae87df_t.jpg"}/
+            = image_tag item.product.avatar.url, class: 'img-responsive'
           .col-sm-6.col-xs-6
             .col-xs-12 
               = item.name

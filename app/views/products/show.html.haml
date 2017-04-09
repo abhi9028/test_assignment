@@ -1,3 +1,7 @@
 .page-header
   %h1= @product.name
-= @product.description.html_safe
+  %h3= @product.price
+.page-header
+  = @product.description.html_safe
+
+= link_to 'Edit Product', edit_product_path(@product), class: 'btn btn-primary'

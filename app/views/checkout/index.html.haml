@@ -3,19 +3,6 @@
     .container
       .row
         %p
-      .row
-        %div{:style => "display: table; margin: auto;"}
-          %span.step.step_complete
-            %a.check-bc{:href => "#"} Cart
-            %span.step_line.step_complete  
-            %span.step_line.backline  
-          %span.step.step_complete
-            %a.check-bc{:href => "#"} Checkout
-            %span.step_line  
-            %span.step_line.step_complete  
-          %span.step_thankyou.check-bc.step_complete Thank you
-      .row
-        %p
   .row.cart-body
     = form_for @order, url: charge_checkout_index_path, html: {id: 'new_order', method: 'POST', class: 'form-horizontal'} do |f|
       = render 'review_order', order: @order

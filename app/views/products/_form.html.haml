@@ -1,0 +1,35 @@
+= form_for(@product, html: { multipart: true, class: 'form-horizontal' }) do |f|
+  - if @product.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@product.errors.count, "error")
+        prohibited this product from being saved:
+      %ul
+        - @product.errors.full_messages.each do |message|
+          %li= message
+  %fieldset
+    / Form Name
+    %legend PRODUCTS
+    / Text input
+    .form-group
+      %label.col-md-4.control-label{:for => "product_name"} PRODUCT NAME
+      .col-md-4
+        = f.text_field :name, class: 'form-control input-md', id: 'product_name', placeholder: 'PRODUCT NAME', required: true
+        / %input#product_name.form-control.input-md{:name => "product_name", :placeholder => "PRODUCT NAME", :required => "", :type => "text"}/
+    .form-group
+      %label.col-md-4.control-label{:for => "product_description"} PRODUCT DESCRIPTION
+      .col-md-4
+        = f.text_area :description, class: 'form-control', id: 'product_description', required: true
+    .form-group
+      %label.col-md-4.control-label{:for => "price"} Price
+      .col-md-4
+        = f.text_field :price, class: 'form-control', id: 'price', required: true
+        %hr
+        .form-group
+          %label.col-md-4.control-label{:for => "filebutton"} Product Image
+          .col-md-4
+            = f.file_field :avatar, class: 'input-file', id: 'filebutton'
+        / Button
+        .form-group
+          .col-md-4
+            %button#singlebutton.btn.btn-primary{:name => "singlebutton"} Submit

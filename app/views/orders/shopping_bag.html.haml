@@ -19,7 +19,7 @@
             - @order.order_items.each do |order_item|
               .row
                 .col-xs-2
-                  %img.img-responsive{:src => "http://placehold.it/100x70"}/
+                  = image_tag order_item.product.avatar.url, class: 'img-responsive'
                 .col-xs-4
                   %h4.product-name
                     %strong
