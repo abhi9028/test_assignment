@@ -46,6 +46,7 @@ GEM
     bootstrap-will_paginate (0.0.10)
       will_paginate
     builder (3.2.2)
+    cancancan (1.16.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.7)
@@ -235,6 +236,7 @@ DEPENDENCIES
   betterlorem
   bootstrap-sass (~> 3.0.3.0)
   bootstrap-will_paginate
+  cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)
   database_cleaner
   devise

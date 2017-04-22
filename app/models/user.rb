@@ -8,4 +8,8 @@ class User < ActiveRecord::Base
   has_many :failed_orders, -> { where(status: 2) }, class_name: "Order", dependent: :destroy
   has_many :purchases
 
+  BUYER = 0
+  ADMIN = 1
+  enum role: { buyer: BUYER, admin: ADMIN }
+
 end
