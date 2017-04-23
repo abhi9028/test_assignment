@@ -1,4 +1,5 @@
 class CheckoutController < ApplicationController
+  load_and_authorize_resource class: Order
   before_action :authenticate_user!
 
   def index

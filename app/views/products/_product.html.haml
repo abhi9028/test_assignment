@@ -1,10 +1,11 @@
 .col-md-4
   .thumbnail
     .img
-      = form_for @order_item do |f|
-        .input-group-btn
-          = f.hidden_field :product_id, value: product.id
-          = f.submit "Add to Cart", class: "btn btn-primary"
+      - if (current_user.buyer? rescue true)
+        = form_for @order_item do |f|
+          .input-group-btn
+            = f.hidden_field :product_id, value: product.id
+            = f.submit "Add to Cart", class: "btn btn-primary"
       =# image_tag "product#{Random.new.rand(8)}"
       = image_tag product.avatar.url
     .caption.caption-up
